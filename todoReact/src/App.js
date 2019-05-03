@@ -4,8 +4,9 @@ import Login from './Login.js';
 import User from './User.js';
 import AddList from './AddList.js';
 import ListDisp from './ListDisp.js';
-import CreateUser from './CreateUser.js'
-import FriendLists from './FriendLists.js'
+import CreateUser from './CreateUser.js';
+import FriendLists from './FriendLists.js';
+import SendRequest from './SendRequest.js';
 
 class App extends Component{
 
@@ -29,7 +30,8 @@ class App extends Component{
   render(){
     let loggedIn=(this.state.userID!==0);
     let friendMode=this.state.mode==="friend's lists";
-    let myListMode=this.state.mode=="my lists";
+    let myListMode=this.state.mode==="my lists";
+    let sendRequest=this.state.mode==="send request";
     return (
       <div className="App">
       <button type="button" onClick={this.test}>test</button>
@@ -48,6 +50,8 @@ class App extends Component{
       {loggedIn & myListMode ? <ListDisp loadListNamesFunction={this.loadListNames}  currentList={this.state.currentList }userID={this.state.userID} currentListItems={this.state.currentListItems} loadListItemsFunction={this.loadCurrentListItems} />:<p/>}
 
       {loggedIn & friendMode? <FriendLists setModeFunction={this.setMode} changeUserFunction={this.changeUser} setCurrentListItemsFunction={this.setCurrentListItems} changeCurrentFriendFunction={this.changeCurrentFriend} upState={this.state} /> :<p/>}
+
+      {loggedIn & sendRequest? <SendRequest/> : <p/>}
   
     </div>
   );
