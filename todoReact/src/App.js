@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
 import Login from './Login.js';
-import User from './User.js';
+import SelectList from './SelectList.js';
 import AddList from './AddList.js';
 import ListDisp from './ListDisp.js';
 import CreateUser from './CreateUser.js';
 import FriendLists from './FriendLists.js';
 import SendRequest from './SendRequest.js';
+import ModeNav from './ModeNav.js';
+import FriendRequests from './FriendRequests.js';
 
 class App extends Component{
 
@@ -20,6 +22,7 @@ class App extends Component{
     currentListItems:[],
     newItemText:"",
     myFriends:[],
+    myFriendRequests:[],
     currentFriendID:0,
     currentFriendUsername:"",
     mode:"my lists"
@@ -41,18 +44,20 @@ class App extends Component{
 
       {loggedIn ? <p/>:<CreateUser changeUserFunction={this.changeUser}/>}
           
-      
+      {loggedIn ? <ModeNav changeUserFunction={this.changeUser} setModeFunction={this.setMode}/>:<p></p>}
 
-      {loggedIn & myListMode ? <User setModeFunction={this.setMode} changeUserFunction={this.changeUser} listNames={this.state.listNames} changeListFunction={this.changeList} username={this.state.username}/>:<p/>}
+      {loggedIn & myListMode ? <SelectList   listNames={this.state.listNames} changeListFunction={this.changeList} username={this.state.username}/>:<p/>}
 
       {loggedIn & myListMode ? <AddList addListFunction={this.addList}/>:<p/>}
 
-      {loggedIn & myListMode ? <ListDisp loadListNamesFunction={this.loadListNames}  currentList={this.state.currentList }userID={this.state.userID} currentListItems={this.state.currentListItems} loadListItemsFunction={this.loadCurrentListItems} />:<p/>}
+      {loggedIn & myListMode ? <ListDisp showDel={true} loadListNamesFunction={this.loadListNames}  currentList={this.state.currentList }userID={this.state.userID} currentListItems={this.state.currentListItems} loadListItemsFunction={this.loadCurrentListItems} />:<p/>}
 
       {loggedIn & friendMode? <FriendLists setModeFunction={this.setMode} changeUserFunction={this.changeUser} setCurrentListItemsFunction={this.setCurrentListItems} changeCurrentFriendFunction={this.changeCurrentFriend} upState={this.state} /> :<p/>}
 
-      {loggedIn & sendRequest? <SendRequest/> : <p/>}
-  
+      {loggedIn & sendRequest? <SendRequest upState={this.state}/> : <p/>}
+
+      <FriendRequests loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/>
+
     </div>
   );
 
@@ -61,6 +66,8 @@ class App extends Component{
   
   
 }
+
+
 
 
 test=()=>{
@@ -156,6 +163,12 @@ setMyFriends=(friends)=>{
   })
 }
 
+setMyFriendRequests=(friends)=>{
+  this.setState({
+    myFriendRequests:friends
+  })
+}
+
 setCurrentListItems=(listItems)=>{
   this.setState({
     currentListItems:listItems
@@ -177,7 +190,7 @@ setListNames=(listNames)=>{
 
 
 loadListNames=()=>{
-  console.log("one")
+  //console.log("one")
   let listNames="";
   let requestURL='http://localhost:8181/api/v1/listNames?userID='+this.state.userID;
   let request = new XMLHttpRequest();
@@ -210,6 +223,23 @@ changeUser=(userID, username) => {
   this.loadListNames();
   this.loadCurrentListItems();
   this.loadMyFriends();
+  this.loadMyFriendRequests();
+}
+
+loadMyFriendRequests=()=>{
+  let myFriendRequests=[];
+  let userID= this.state.userID;
+  let requestURL='http://localhost:8181/api/v1/myFriendRequests/'+userID;
+    let request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.setRequestHeader("content-Type","application/json");
+    request.onload=()=>{
+      myFriendRequests=request.response
+      console.log(myFriendRequests)
+      this.setMyFriendRequests(myFriendRequests);
+    }
+    request.send();
 }
 
 setMode=(mode)=>{

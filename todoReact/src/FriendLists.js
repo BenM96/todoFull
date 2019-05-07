@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListDisp from './ListDisp.js';
-import User from './User';
+import SelectList from './SelectList';
 
 class FriendLists extends Component{
     state={
@@ -11,15 +11,17 @@ class FriendLists extends Component{
         let loggedIn=(this.state.userID!==0);
         return(
             <div>
-                <User setModeFunction={this.props.setModeFunction} changeUserFunction={this.props.changeUserFunction} listNames={this.props.upState.myFriends.map(friend => friend.username)} changeListFunction={this.changeCurrentFriend} username={this.props.upState.username}/>
-                <ListDisp loadListNamesFunction={this.loadListNames}  currentList={this.props.upState.username } userID={this.props.upState.currentFriendID} currentListItems={this.props.upState.currentListItems} loadListItemsFunction={this.loadListItems} />
+                <SelectList  listNames={this.props.upState.myFriends.map(friend => friend.username)} changeListFunction={this.changeCurrentFriend} username={this.props.upState.username}/>
+                <ListDisp showDel={false} currentList={this.props.upState.username } userID={this.props.upState.currentFriendID} currentListItems={this.props.upState.currentListItems} loadListItemsFunction={this.loadListItems} />
 
             </div>
         )
     }
     
 
+    loadListNames=()=>{
 
+    }
 
     loadListItems=()=>{
         //console.log('http://localhost:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);

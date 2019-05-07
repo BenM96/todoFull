@@ -18,6 +18,10 @@ public class Friends {
 		this.userID2=userID2;
 	}
 	
+	public void confirm() {
+		this.friends=true;
+	}
+	
 	public void saveFriends(){
 		int friendsInt;
 		if(this.friends) {

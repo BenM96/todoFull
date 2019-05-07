@@ -65,6 +65,16 @@ public class DataBase {
 		stmt.executeUpdate("insert into friends(userID1, userID2, friends) values ("+userID1+","+userID2+","+friends+");");
 		stmt.close();
 	}
+	
+	public void saveFriends(Friends friends) throws SQLException {
+		int friendsInt;
+		if(friends.isFriends()) {
+			friendsInt=1;
+		}else {
+			friendsInt=0;
+		}
+		saveFriends(friends.getUserID1(), friends.getUserID2(), friendsInt);
+	}
 		
 	public void saveItem(Item item) throws SQLException {
 		saveItem(item.getItemID(),item.getUserID(),item.getDesc(),item.getListName(),item.isCompleted());
@@ -136,7 +146,7 @@ public class DataBase {
 		saveItem(8,2,"get old","lotr",false);
 		saveItem(9,3,"bilbo nagging","bilbo",false);
 		saveFriends(2,3,1);
-		saveFriends(2,4,1);
+		saveFriends(2,4,0);
 	}
 
 

@@ -27,7 +27,7 @@ class ListDisp extends Component{
       <ItemTable  loadListItemsFunction={this.props.loadListItemsFunction} ItemList={this.props.currentListItems} />
 
         <br/><br/>
-        <button id="deleteCurrentList" onClick={this.deleteCurrentList}>Delete List!</button>
+        {this.props.showDel?<button id="deleteCurrentList" onClick={this.deleteCurrentList}>Delete List!</button>:<p></p>}
 
 
 
