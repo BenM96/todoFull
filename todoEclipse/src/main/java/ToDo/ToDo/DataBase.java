@@ -20,7 +20,8 @@ public class DataBase {
 	public void build() throws SQLException {
 		conn=DriverManager.getConnection(DB_URL,USER,PASS);
 		stmt=conn.createStatement();
-		stmt.executeUpdate("CREATE SCHEMA tooo");
+		stmt.executeUpdate("CREATE SCHEMA if not exists todo");
+		stmt.executeUpdate("use todo");
 		stmt.executeUpdate("drop table if exists list_items;");
 		stmt.executeUpdate("drop table if exists users;");
 		stmt.executeUpdate("drop table if exists friends;");
