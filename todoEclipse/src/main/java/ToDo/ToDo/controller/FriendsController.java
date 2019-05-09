@@ -2,6 +2,7 @@ package ToDo.ToDo.controller;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import ToDo.ToDo.AllFriends;
 import ToDo.ToDo.Friends;
 import ToDo.ToDo.User;
 
+@SpringBootApplication
 @RestController
 @RequestMapping("api/v1/")
 public class FriendsController {
