@@ -43,7 +43,7 @@ class Login extends Component {
             let password=this.state.passwordText;
             console.log(password)
             let users=[];
-            let requestURL='http://localhost:8181/api/v1/users';
+            let requestURL='http://35.246.119.78:8181/api/v1/users';
             let request = new XMLHttpRequest();
             request.open('GET', requestURL);
             request.responseType = 'json';
