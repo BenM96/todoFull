@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 class CreateUser extends Component{
 
@@ -10,12 +11,12 @@ class CreateUser extends Component{
     render(){
         return(
             <form>
-                <h3>create User</h3>
+                <h3>Create User:</h3>
                 New Username:
                 <input type='text' onChange={this.updateNewUsernameText} placeholder='new username'/><br/>
                 New Password:
-                <input type='password' onChange={this.updateNewPasswordText} placeholder='new password'/>
-                <button type='button' onClick={this.addUser}>create user</button>
+                <input type='password' onChange={this.updateNewPasswordText} placeholder='new password'/><br/>
+                <Button type='button' onClick={this.addUser}>create user</Button>
             </form>
         )
     }
@@ -51,6 +52,7 @@ class CreateUser extends Component{
 
     }
 
+    
 
 
 }

@@ -9,7 +9,7 @@ class Header extends Component {
 
     render() {
       return (
-        <header id="header">
+        <header align="center" id="header">
           <h1>ToDo lists</h1>
 
         </header>

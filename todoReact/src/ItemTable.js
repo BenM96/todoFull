@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 class ItemTable extends Component{
     render(){
         return(
-            <table id="currentList" cellspacing="10">
+            <table  align="left"  class="table" id="currentList" cellspacing="10">
+            <thread>
             <tr>
-                <th id="item">item</th>
-                <th >completed</th>
+                <th scope="col" id="item">item</th>
+                <th scope="col">completed</th>
             </tr>
+              </thread>
+              <tbody>
             {this.props.ItemList.map((item,index)=>
             <tr>
-              <td>{item.desc}</td>
-              <td>{item.completed.toString()}</td>
-              <td><button id={"complete"+item.itemID} onClick={this.complete}>complete</button></td>
-              <td><button id={"delete"+item.itemID} onClick={this.delete}>delete</button></td>
+              <td scope="row">{item.desc}</td>
+              <td scope="row">{item.completed.toString()}</td>
+              <td scope="row"><Button id={"complete"+item.itemID} variant="success" onClick={this.complete}>complete</Button></td>
+              <td scope="row"><Button id={"delete"+item.itemID} variant="danger" onClick={this.delete}>delete</Button></td>
             </tr>)}
-
+            </tbody>
         </table>
         )
     }

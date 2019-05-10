@@ -38,7 +38,7 @@ class App extends Component{
     let sendRequest=this.state.mode==="send request";
     let friendRequests= this.state.mode==="friend requests";
     return (
-      <div className="App">
+      <div align="center" className="App">
       <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
       <link
         rel="stylesheet"
@@ -52,7 +52,7 @@ class App extends Component{
       <Header/>
 
       {loggedIn ? <p></p>:<Login setModeFunction={this.setMode} changeUserFunction={this.changeUser}/>}
-
+      
       {loggedIn ? <p/>:<CreateUser changeUserFunction={this.changeUser}/>}
           
       {loggedIn ? <ModeNav changeUserFunction={this.changeUser} setModeFunction={this.setMode}/>:<p></p>}
@@ -226,8 +226,7 @@ setCurrentListItems=(listItems)=>{
 
 setListNames=(listNames)=>{
   this.setState({
-    listNames:listNames,
-    currentList:"please select or create a list"
+    listNames:listNames
   });
 }
 

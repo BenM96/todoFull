@@ -11,9 +11,11 @@ class Login extends Component {
       render() {
         return (
             <nav id="login">
+            <h3>Login:</h3>
       Username: <input type="text" onChange={this.updateUsernameText}/><br/>
-      Password: <input type="password" onChange={this.updatePasswordText}/>
+      Password: <input type="password" onChange={this.updatePasswordText}/><br/>
       <Button type="button" varient="danger" onClick={this.login}>login</Button><br/>
+      <br/><br/>
       </nav>
         );
       }
