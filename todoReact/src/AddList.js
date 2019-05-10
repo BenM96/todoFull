@@ -10,7 +10,7 @@ class AddList extends Component{
             <form id="addList">
                 New list
                 <br/>
-                <input  type="text" placeholder="List Name" onChange={this.updateNewListText}/>
+                <input  ref="newListInput" type="text" placeholder="List Name" onChange={this.updateNewListText}/>
                 <button type="button" onClick={this.addList}>add</button>
             </form>
         )
@@ -26,6 +26,7 @@ class AddList extends Component{
     addList=()=>{
         let newListName=this.state.newListText;
         this.props.addListFunction(newListName);
+        this.refs.newListInput.value="";
     }
 }
 

@@ -20,7 +20,7 @@ class ListDisp extends Component{
 
         <form id="addItem">
             Add Item <br/>
-            <input id="newItemInput" type="text" placeholder="new item" onChange={this.updateAddItemText}/>
+            <input ref="newItemInput" id="newItemInput" type="text" placeholder="new item" onChange={this.updateAddItemText}/>
             <button type="button"onClick={this.addItem}>add</button>
         </form>
 
@@ -61,6 +61,7 @@ class ListDisp extends Component{
         request.onload=()=>{
             this.props.loadListItemsFunction();
             console.log(newItem);
+            this.refs.newItemInput.value="";
         }
         request.send(JSON.stringify(newItem));
         

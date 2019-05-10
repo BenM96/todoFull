@@ -11,7 +11,7 @@ class SendRequest extends Component{
         return(
             <div>
                 <h3>send friend request</h3>
-                <input type="text" onChange={this.updateUsernameText} placeholder="Username"/>
+                <input ref="usernameInput" type="text" onChange={this.updateUsernameText} placeholder="Username"/>
                 <button onClick={this.sendRequest} type='button'>send</button>
 
             </div>
@@ -58,6 +58,7 @@ class SendRequest extends Component{
         request.setRequestHeader("Content-Type","application/json");
         request.onload=()=>{
             console.log("sent");
+            this.refs.usernameInput.value="";
         }
         request.send();       
         

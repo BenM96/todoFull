@@ -48,7 +48,6 @@ class App extends Component{
       />
 
 
-      <Button type="button" onClick={this.test} variant="danger">test</Button>
       <Header/>
 
       {loggedIn ? <p></p>:<Login setModeFunction={this.setMode} changeUserFunction={this.changeUser}/>}
