@@ -13,13 +13,15 @@ public class DataBase {
 	
 	public final String DB_URL="jdbc:mysql://localhost:3306/todo";
 	public final String USER = "root";
-	public final String PASS = "";
+	public final String PASS = "pass";
 	private Connection conn= null;
 	private Statement stmt=null;
 	
 	public void build() throws SQLException {
 		conn=DriverManager.getConnection(DB_URL,USER,PASS);
 		stmt=conn.createStatement();
+		stmt.executeUpdate("CREATE database if not exists todo");
+		stmt.executeUpdate("use todo");
 		stmt.executeUpdate("drop table if exists list_items;");
 		stmt.executeUpdate("drop table if exists users;");
 		stmt.executeUpdate("drop table if exists friends;");
