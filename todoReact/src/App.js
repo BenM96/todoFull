@@ -89,7 +89,7 @@ setMode=(mode)=>{
     this.loadItems(this.state.listNames[0]);
   }
 
-  if(mode=="friend's lists"){
+  if(mode==="friend's lists"){
     this.setState({
       currentListItems:[]
     })
