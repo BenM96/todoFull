@@ -146,7 +146,7 @@ public class DataBase {
 		saveItem(8,2,"get old","lotr",false);
 		saveItem(9,3,"bilbo nagging","bilbo",false);
 		saveFriends(2,3,1);
-		saveFriends(2,4,0);
+		saveFriends(4,2,0);
 	}
 
 

@@ -9,6 +9,8 @@ import FriendLists from './FriendLists.js';
 import SendRequest from './SendRequest.js';
 import ModeNav from './ModeNav.js';
 import FriendRequests from './FriendRequests.js';
+import Button from 'react-bootstrap/Button';
+import { SSL_OP_EPHEMERAL_RSA } from 'constants';
 
 class App extends Component{
 
@@ -25,7 +27,7 @@ class App extends Component{
     myFriendRequests:[],
     currentFriendID:0,
     currentFriendUsername:"",
-    mode:"my lists"
+    mode:""
   }
 
 
@@ -35,12 +37,22 @@ class App extends Component{
     let friendMode=this.state.mode==="friend's lists";
     let myListMode=this.state.mode==="my lists";
     let sendRequest=this.state.mode==="send request";
+    let friendRequests= this.state.mode==="friend requests";
     return (
       <div className="App">
-      <button type="button" onClick={this.test}>test</button>
+      <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+      />
+
+
+      <Button type="button" onClick={this.test} variant="danger">test</Button>
       <Header/>
 
-      {loggedIn ? <p></p>:<Login changeUserFunction={this.changeUser}/>}
+      {loggedIn ? <p></p>:<Login setModeFunction={this.setMode} changeUserFunction={this.changeUser}/>}
 
       {loggedIn ? <p/>:<CreateUser changeUserFunction={this.changeUser}/>}
           
@@ -56,7 +68,7 @@ class App extends Component{
 
       {loggedIn & sendRequest? <SendRequest upState={this.state}/> : <p/>}
 
-      <FriendRequests loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/>
+      {loggedIn & friendRequests ?<FriendRequests loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/> :<p/>}
 
     </div>
   );
@@ -76,11 +88,31 @@ test=()=>{
 }
 
 changeCurrentFriend=(friendID,friendUsername)=>{
+  console.log(friendID);
   this.setState({
     currentFriendID:friendID,
     currentFriendUsername:friendUsername
   })
+  console.log(this.state.currentFriendID);
+  this.loadCurrentListItemsF(friendID);
 
+}
+
+loadCurrentListItemsF=(friendID)=>{
+  //console.log('http://localhost:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
+
+  let listItems="";
+  let requestURL='http://localhost:8181/api/v1/listItems?listName='+this.state.username+'&userID='+friendID;
+  let request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'json'
+  request.setRequestHeader("content-Type","application/json");
+  request.onload=()=>{
+    listItems=request.response;      
+    this.setCurrentListItems(listItems);
+    //console.log(listItems);
+  }
+  request.send();
 }
 
 addList=(newListName)=>{
@@ -169,11 +201,6 @@ setMyFriendRequests=(friends)=>{
   })
 }
 
-setCurrentListItems=(listItems)=>{
-  this.setState({
-    currentListItems:listItems
-  });
-}
 
 setCurrentListItems=(listItems)=>{
   this.setState({
@@ -246,6 +273,7 @@ setMode=(mode)=>{
   this.setState({
     mode:mode
   })
+
 }
 
 

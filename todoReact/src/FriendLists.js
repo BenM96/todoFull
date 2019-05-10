@@ -19,9 +19,6 @@ class FriendLists extends Component{
     }
     
 
-    loadListNames=()=>{
-
-    }
 
     loadListItems=()=>{
         //console.log('http://localhost:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
@@ -45,21 +42,25 @@ class FriendLists extends Component{
 
     changeCurrentFriend=(e)=>{
         let friendUsername=e.target.innerHTML;
-        let friendID= this.getFriendID(friendUsername);
-        this.props.changeCurrentFriendFunction(friendID, friendUsername)
-        this.loadListItems(e.target.innerHTML);
-        //console.log(this.props.upState.currentFriendID)
-        this.loadListItems();
-    }
-
-    getFriendID=(username)=>{
+        //let friendID= this.getFriendID(friendUsername);
         for (let friend of this.props.upState.myFriends){
-            if (username===friend.username){
-                return friend.userID
+            if (friendUsername===friend.username){
+                let friendID= friend.userID
+                //console.log(friendID);
+                this.props.changeCurrentFriendFunction(friendID, friendUsername)
             }
         }
-    
+        //console.log(this.props.upState.currentFriendID)
     }
+
+    // getFriendID=(username)=>{
+    //     for (let friend of this.props.upState.myFriends){
+    //         if (username===friend.username){
+    //             return friend.userID
+    //         }
+    //     }
+    
+    // }
 
     test=()=>{
         console.log(this.props.upState.myFriends);

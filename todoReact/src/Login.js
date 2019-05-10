@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 class Login extends Component {
       state={
@@ -11,8 +12,8 @@ class Login extends Component {
         return (
             <nav id="login">
       username<input type="text" onChange={this.updateUsernameText}/>
-      <button type="button" onClick={this.login}>login</button><br/>
       password<input type="password" onChange={this.updatePasswordText}/>
+      <Button type="button" varient="danger" onClick={this.login}>login</Button><br/>
       </nav>
         );
       }
@@ -58,6 +59,7 @@ class Login extends Component {
             for(let user of users){
               if(user.username===username & user.password===password){
                 this.props.changeUserFunction(user.userID,username)
+                this.props.setModeFunction("my lists");
           
               }
             }
