@@ -11,8 +11,8 @@ class Login extends Component {
       render() {
         return (
             <nav id="login">
-      username<input type="text" onChange={this.updateUsernameText}/>
-      password<input type="password" onChange={this.updatePasswordText}/>
+      Username: <input type="text" onChange={this.updateUsernameText}/><br/>
+      Password: <input type="password" onChange={this.updatePasswordText}/>
       <Button type="button" varient="danger" onClick={this.login}>login</Button><br/>
       </nav>
         );

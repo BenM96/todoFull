@@ -8,7 +8,6 @@ class FriendLists extends Component{
     }
 
     render(){
-        let loggedIn=(this.state.userID!==0);
         return(
             <div>
                 <SelectList  listNames={this.props.upState.myFriends.map(friend => friend.username)} changeListFunction={this.changeCurrentFriend} username={this.props.upState.username}/>

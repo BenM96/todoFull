@@ -11,9 +11,9 @@ class CreateUser extends Component{
         return(
             <form>
                 <h3>create User</h3>
-                New Username
+                New Username:
                 <input type='text' onChange={this.updateNewUsernameText} placeholder='new username'/><br/>
-                New Password
+                New Password:
                 <input type='password' onChange={this.updateNewPasswordText} placeholder='new password'/>
                 <button type='button' onClick={this.addUser}>create user</button>
             </form>

@@ -10,7 +10,6 @@ import SendRequest from './SendRequest.js';
 import ModeNav from './ModeNav.js';
 import FriendRequests from './FriendRequests.js';
 import Button from 'react-bootstrap/Button';
-import { SSL_OP_EPHEMERAL_RSA } from 'constants';
 
 class App extends Component{
 
@@ -79,7 +78,24 @@ class App extends Component{
   
 }
 
+setMode=(mode)=>{
+  this.setState({
+    mode:mode
+  })
+  if(mode==="my lists"){
+    this.setState({
+      currentList:this.state.listNames[0]
+    })
+    this.loadItems(this.state.listNames[0]);
+  }
 
+  if(mode=="friend's lists"){
+    this.setState({
+      currentListItems:[]
+    })
+  }
+
+}
 
 
 test=()=>{
@@ -269,12 +285,7 @@ loadMyFriendRequests=()=>{
     request.send();
 }
 
-setMode=(mode)=>{
-  this.setState({
-    mode:mode
-  })
 
-}
 
 
 }
