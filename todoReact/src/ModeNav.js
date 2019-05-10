@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 class User extends Component{
 
@@ -6,13 +7,13 @@ class User extends Component{
 
     render(){
         return(
-            <nav id="user">
+            <nav align="center" class="p-3 mb-2 bg-secondary text-white" id="user">
                 <h2 id="username">{this.props.username}</h2>
-                <button type='button' id='my' onClick={this.changeMode}>my lists</button>
-                <button type='button' id='friends' onClick={this.changeMode}>friend's lists</button>
-                <button type='button' id='sendRequest' onClick={this.changeMode}>send request</button>
-                <button type='button' id='sendRequest' onClick={this.changeMode}>friend requests</button>
-                <button type='button' onClick={this.logout}>logout</button>
+                <Button type='Button' id='my' onClick={this.changeMode}>my lists</Button>
+                <Button type='Button' id='friends' onClick={this.changeMode}>friend's lists</Button>
+                <Button type='Button' id='sendRequest' onClick={this.changeMode}>send request</Button>
+                <Button type='Button' id='sendRequest' onClick={this.changeMode}>friend requests</Button>
+                <Button variant="danger" type='Button' onClick={this.logout}>logout</Button>
           
             </nav>
         )
