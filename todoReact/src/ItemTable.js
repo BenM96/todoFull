@@ -22,7 +22,7 @@ class ItemTable extends Component{
 
     complete=(e)=>{
         let itemID=e.target.id.substring(8);
-        let requestURL='http://localhost:8181/api/v1/complete/'+itemID;
+        let requestURL='http://35.246.119.78:8181/api/v1/complete/'+itemID;
         let request = new XMLHttpRequest();
         request.open('PUT', requestURL);
         request.responseType = 'json';
@@ -38,7 +38,7 @@ class ItemTable extends Component{
       delete=(e)=>{
         let itemID= e.target.id.substring(6);
         //console.log(itemID);
-        let requestURL='http://localhost:8181/api/v1/item/'+itemID;
+        let requestURL='http://35.246.119.78:8181/api/v1/item/'+itemID;
         let request = new XMLHttpRequest();
         request.open('DELETE', requestURL);
         request.responseType = 'json';

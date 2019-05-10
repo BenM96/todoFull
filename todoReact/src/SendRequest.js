@@ -28,7 +28,7 @@ class SendRequest extends Component{
 
     GetUserID=(username)=>{
         let users=[];
-        let requestURL='http://localhost:8181/api/v1/users';
+        let requestURL='http://35.246.119.78:8181/api/v1/users';
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';
@@ -50,7 +50,7 @@ class SendRequest extends Component{
         console.log("---" + this.state.friendID);
         let userID1=this.props.upState.userID;
         let userID2=this.state.friendID;
-        let requestURL='http://localhost:8181/api/v1/friends?userID1='+userID1+'&userID2='+userID2;
+        let requestURL='http://35.246.119.78:8181/api/v1/friends?userID1='+userID1+'&userID2='+userID2;
         let request = new XMLHttpRequest();
         request.open('POST', requestURL);
         request.responseType = 'json';

@@ -52,7 +52,7 @@ class ListDisp extends Component{
           "desc":this.state.addItemText,
           "listName":this.props.currentList
         }
-        let requestURL='http://localhost:8181/api/v1/items';
+        let requestURL='http://35.246.119.78:8181/api/v1/items';
         let request = new XMLHttpRequest();
         request.open('POST', requestURL);
         request.responseType = 'json';
@@ -82,7 +82,7 @@ class ListDisp extends Component{
         for (let item of items){
           let itemID= item.itemID;
           console.log(itemID);
-          let requestURL='http://localhost:8181/api/v1/item/'+itemID;
+          let requestURL='http://35.246.119.78:8181/api/v1/item/'+itemID;
           let request = new XMLHttpRequest();
           request.open('DELETE', requestURL);
           request.responseType = 'json';
