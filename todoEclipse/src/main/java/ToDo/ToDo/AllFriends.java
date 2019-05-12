@@ -35,15 +35,24 @@ public class AllFriends {
 		AllUsers users=new AllUsers();
 		ArrayList<User> myFriendRequests= new ArrayList<User>();
 		for(Friends friends : this.allFriends) {
-			if(friends.getUserID1()==userID & !friends.isFriends()) {
-				myFriendRequests.add(users.getUser(friends.getUserID2()));
-			}
 			if(friends.getUserID2()==userID & !friends.isFriends()) {
 				myFriendRequests.add(users.getUser(friends.getUserID1()));
 			}
 		}
 		return myFriendRequests;
 	}
+	
+	public ArrayList<User> sentFriendRequests(int userID){
+		AllUsers users=new AllUsers();
+		ArrayList<User> myFriendRequests= new ArrayList<User>();
+		for(Friends friends : this.allFriends) {
+			if(friends.getUserID1()==userID & !friends.isFriends()) {
+				myFriendRequests.add(users.getUser(friends.getUserID1()));
+			}
+		}
+		return myFriendRequests;
+	}
+
 	
 	public void addFriends(int userID1, int userID2) {
 		Friends newFriends= new Friends(userID1, userID2, 0);

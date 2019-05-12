@@ -24,6 +24,7 @@ class App extends Component{
     newItemText:"",
     myFriends:[],
     myFriendRequests:[],
+    sentFriendRequests:[],
     currentFriendID:0,
     currentFriendUsername:"",
     mode:""

@@ -30,6 +30,11 @@ public class FriendsController {
 		return allFriends.myFriendRequests(id);
 	}
 	
+	@RequestMapping(value="sentFriendRequests/{id}", method=RequestMethod.GET)
+	public List<User> sentFriendRequests(@PathVariable Integer id){
+		return allFriends.sentFriendRequests(id);
+	}
+	
 	@RequestMapping(value="friends", method=RequestMethod.POST)
 	public boolean addFriend(@RequestParam (value="userID1") int userID1, @RequestParam (value="userID2") int userID2) {
 		allFriends.addFriends(userID1,userID2);
