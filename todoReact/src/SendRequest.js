@@ -13,6 +13,19 @@ class SendRequest extends Component{
                 <h3>send friend request</h3>
                 <input ref="usernameInput" type="text" onChange={this.updateUsernameText} placeholder="Username"/>
                 <button onClick={this.sendRequest} type='button'>send</button>
+                <table align="left">
+                    <tr>
+                        <th>Requests sent</th>
+                        <th>Status</th>
+                    </tr>
+                    {this.props.upState.sentFriendRequests.map((friend)=>
+                        <tr>
+                            <td>{friend.username}</td>
+                            <td>Pending...</td>
+                        </tr>)}
+
+                    
+                </table>
 
             </div>
         )
@@ -59,6 +72,7 @@ class SendRequest extends Component{
         request.onload=()=>{
             console.log("sent");
             this.refs.usernameInput.value="";
+            this.props.loadSentFriendRequestsFunction();
         }
         request.send();       
         

@@ -47,7 +47,7 @@ public class AllFriends {
 		ArrayList<User> myFriendRequests= new ArrayList<User>();
 		for(Friends friends : this.allFriends) {
 			if(friends.getUserID1()==userID & !friends.isFriends()) {
-				myFriendRequests.add(users.getUser(friends.getUserID1()));
+				myFriendRequests.add(users.getUser(friends.getUserID2()));
 			}
 		}
 		return myFriendRequests;

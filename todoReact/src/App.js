@@ -40,6 +40,7 @@ class App extends Component{
     let friendRequests= this.state.mode==="friend requests";
     return (
       <div align="center" className="App">
+      <button type="button" onClick={this.test}>test</button>
       <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
       <link
         rel="stylesheet"
@@ -65,7 +66,7 @@ class App extends Component{
 
       {loggedIn & friendMode? <FriendLists setModeFunction={this.setMode} changeUserFunction={this.changeUser} setCurrentListItemsFunction={this.setCurrentListItems} changeCurrentFriendFunction={this.changeCurrentFriend} upState={this.state} /> :<p/>}
 
-      {loggedIn & sendRequest? <SendRequest upState={this.state}/> : <p/>}
+      {loggedIn & sendRequest? <SendRequest loadSentFriendRequestsFunction={this.loadSentFriendRequests} upState={this.state}/> : <p/>}
 
       {loggedIn & friendRequests ?<FriendRequests loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/> :<p/>}
 
@@ -99,8 +100,7 @@ setMode=(mode)=>{
 
 
 test=()=>{
-  console.log(this.state.myFriends);
-  this.state.myFriends.map(friend=>console.log(friend.username))
+  console.log(this.state.sentFriendRequests);
 }
 
 changeCurrentFriend=(friendID,friendUsername)=>{
@@ -217,6 +217,12 @@ setMyFriendRequests=(friends)=>{
   })
 }
 
+setSentFriendRequests=(friends)=>{
+  this.setState({
+    sentFriendRequests:friends
+  })
+}
+
 
 setCurrentListItems=(listItems)=>{
   this.setState({
@@ -266,6 +272,7 @@ changeUser=(userID, username) => {
   this.loadCurrentListItems();
   this.loadMyFriends();
   this.loadMyFriendRequests();
+  this.loadSentFriendRequests();
 }
 
 loadMyFriendRequests=()=>{
@@ -280,6 +287,22 @@ loadMyFriendRequests=()=>{
       myFriendRequests=request.response
       console.log(myFriendRequests)
       this.setMyFriendRequests(myFriendRequests);
+    }
+    request.send();
+}
+
+loadSentFriendRequests=()=>{
+  let sentFriendRequests=[];
+  let userID= this.state.userID;
+  let requestURL='http://35.246.119.78:8181/api/v1/sentFriendRequests/'+userID;
+    let request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.setRequestHeader("content-Type","application/json");
+    request.onload=()=>{
+      sentFriendRequests=request.response
+      console.log(sentFriendRequests)
+      this.setSentFriendRequests(sentFriendRequests);
     }
     request.send();
 }
