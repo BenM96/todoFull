@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 class ItemTable extends Component{
     render(){
         return(
-            <table  align="left"  class="table" id="currentList" cellspacing="10">
+            <Table  align="left"  class="table" id="currentList" cellspacing="10">
             <thread>
             <tr>
-                <th scope="col" id="item">item</th>
-                <th scope="col">completed</th>
+                <th  id="item">item</th>
+                <th >completed</th>
+                <th/>
+                <th/>
+                
             </tr>
               </thread>
               <tbody>
             {this.props.ItemList.map((item,index)=>
             <tr>
-              <td scope="row">{item.desc}</td>
-              <td scope="row">{item.completed.toString()}</td>
-              <td scope="row"><Button id={"complete"+item.itemID} variant="success" onClick={this.complete}>complete</Button></td>
-              <td scope="row"><Button id={"delete"+item.itemID} variant="danger" onClick={this.delete}>delete</Button></td>
+              <td >{item.desc}</td>
+              <td >{item.completed.toString()}</td>
+              <td ><Button id={"complete"+item.itemID} variant="success" onClick={this.complete}>complete</Button></td>
+              <td ><Button id={"delete"+item.itemID} variant="danger" onClick={this.delete}>delete</Button></td>
             </tr>)}
             </tbody>
-        </table>
+        </Table>
         )
     }
 

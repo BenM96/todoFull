@@ -40,7 +40,7 @@ class App extends Component{
     let friendRequests= this.state.mode==="friend requests";
     return (
       <div align="center" className="App">
-      <button type="button" onClick={this.test}>test</button>
+      {/* <button type="button" onClick={this.test}>test</button> */}
       <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
       <link
         rel="stylesheet"

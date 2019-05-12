@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Table from 'react-bootstrap/Table';
 
 class SendRequest extends Component{
     state={
@@ -12,12 +12,17 @@ class SendRequest extends Component{
             <div>
                 <h3>send friend request</h3>
                 <input ref="usernameInput" type="text" onChange={this.updateUsernameText} placeholder="Username"/>
-                <button onClick={this.sendRequest} type='button'>send</button>
-                <table align="left">
+                <button onClick={this.sendRequest} type='button'>send</button><br/>
+
+
+                <Table align="left">
+                <thead>
                     <tr>
-                        <th>Requests sent</th>
-                        <th>Status</th>
+                        <th scope="col" >Requests sent</th>
+                        <th scope="col" >Status</th>
                     </tr>
+                </thead>
+                <tbody>
                     {this.props.upState.sentFriendRequests.map((friend)=>
                         <tr>
                             <td>{friend.username}</td>
@@ -25,7 +30,8 @@ class SendRequest extends Component{
                         </tr>)}
 
                     
-                </table>
+                </tbody>
+                </Table>
 
             </div>
         )
