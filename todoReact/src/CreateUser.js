@@ -38,7 +38,7 @@ class CreateUser extends Component{
             username:this.state.newUsernameText,
             password:this.state.newPasswordText
         }
-        let requestURL=this.props.API+':8181/api/v1/users';
+        let requestURL=this.props.API+'/api/v1/users';
         let request = new XMLHttpRequest();
         request.open('POST', requestURL);
         request.responseType = 'json';

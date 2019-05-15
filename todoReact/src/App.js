@@ -15,7 +15,7 @@ class App extends Component{
 
 
   state={
-    API:"http://localhost",
+    API:"http://localhost:80",
     userID:0,
     username:"",
     currentList:"",
@@ -81,7 +81,7 @@ class App extends Component{
 
 // existingUser=(username)=>{
 //   let users=[];
-//   let requestURL=this.state.API+':8181/api/v1/users';
+//   let requestURL=this.state.API+'/api/v1/users';
 //   let request = new XMLHttpRequest();
 //   request.open('GET', requestURL);
 //   request.responseType = 'json';
@@ -139,10 +139,10 @@ changeCurrentFriend=(friendID,friendUsername)=>{
 }
 
 loadCurrentListItemsF=(friendID)=>{
-  //console.log(this.state.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
+  //console.log(this.state.API+'/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
 
   let listItems="";
-  let requestURL=this.state.API+':8181/api/v1/listItems?listName='+this.state.username+'&userID='+friendID;
+  let requestURL=this.state.API+'/api/v1/listItems?listName='+this.state.username+'&userID='+friendID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json'
@@ -184,7 +184,7 @@ changeList=(e)=>{
 loadCurrentListItems=()=>{
 
     let listItems="";
-    let requestURL=this.state.API+':8181/api/v1/listItems?listName='+this.state.currentList+'&userID='+this.state.userID;
+    let requestURL=this.state.API+'/api/v1/listItems?listName='+this.state.currentList+'&userID='+this.state.userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json'
@@ -200,7 +200,7 @@ loadCurrentListItems=()=>{
 loadMyFriends=()=>{
   let myFriends=[];
   let userID= this.state.userID;
-  let requestURL=this.state.API+':8181/api/v1/myFriends/'+userID;
+  let requestURL=this.state.API+'/api/v1/myFriends/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
@@ -216,7 +216,7 @@ loadMyFriends=()=>{
 loadItems=(listName)=>{
 
   let listItems="";
-  let requestURL=this.state.API+':8181/api/v1/listItems?listName='+listName+'&userID='+this.state.userID;
+  let requestURL=this.state.API+'/api/v1/listItems?listName='+listName+'&userID='+this.state.userID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json'
@@ -264,7 +264,7 @@ setListNames=(listNames)=>{
 loadListNames=()=>{
   //console.log("one")
   let listNames="";
-  let requestURL=this.state.API+':8181/api/v1/listNames?userID='+this.state.userID;
+  let requestURL=this.state.API+'/api/v1/listNames?userID='+this.state.userID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json';
@@ -302,7 +302,7 @@ changeUser=(userID, username) => {
 loadMyFriendRequests=()=>{
   let myFriendRequests=[];
   let userID= this.state.userID;
-  let requestURL=this.state.API+':8181/api/v1/myFriendRequests/'+userID;
+  let requestURL=this.state.API+'/api/v1/myFriendRequests/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
@@ -318,7 +318,7 @@ loadMyFriendRequests=()=>{
 loadSentFriendRequests=()=>{
   let sentFriendRequests=[];
   let userID= this.state.userID;
-  let requestURL=this.state.API+':8181/api/v1/sentFriendRequests/'+userID;
+  let requestURL=this.state.API+'/api/v1/sentFriendRequests/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';

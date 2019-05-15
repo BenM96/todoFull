@@ -20,10 +20,10 @@ class FriendLists extends Component{
 
 
     loadListItems=()=>{
-        //console.log(this.props.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
+        //console.log(this.props.API+'/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
 
         let listItems="";
-        let requestURL=this.props.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID;
+        let requestURL=this.props.API+'/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID;
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json'

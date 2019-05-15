@@ -13,7 +13,7 @@ class FriendRequests extends Component{
 
     confirm=(e)=>{
         let friendID=e.target.id.substring(7);
-        let requestURL=this.props.API+':8181/api/v1/friends/confirm?userID1='+friendID+'&userID2='+this.props.upState.userID;
+        let requestURL=this.props.API+'/api/v1/friends/confirm?userID1='+friendID+'&userID2='+this.props.upState.userID;
         let request = new XMLHttpRequest();
         request.open('PUT', requestURL);
         request.responseType = 'json';
