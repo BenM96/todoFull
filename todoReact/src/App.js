@@ -9,13 +9,13 @@ import FriendLists from './FriendLists.js';
 import SendRequest from './SendRequest.js';
 import ModeNav from './ModeNav.js';
 import FriendRequests from './FriendRequests.js';
-import Button from 'react-bootstrap/Button';
 
 class App extends Component{
 
 
 
   state={
+    API:"http://localhost",
     userID:0,
     username:"",
     currentList:"",
@@ -52,23 +52,23 @@ class App extends Component{
 
       <Header/>
 
-      {loggedIn ? <p></p>:<Login setModeFunction={this.setMode} changeUserFunction={this.changeUser}/>}
+      {loggedIn ? <p></p>:<Login API={this.state.API} setModeFunction={this.setMode} changeUserFunction={this.changeUser}/>}
       
-      {loggedIn ? <p/>:<CreateUser changeUserFunction={this.changeUser}/>}
+      {loggedIn ? <p/>:<CreateUser API={this.state.API} existingUserFunction={this.existingUser} changeUserFunction={this.changeUser}/>}
           
-      {loggedIn ? <ModeNav changeUserFunction={this.changeUser} setModeFunction={this.setMode}/>:<p></p>}
+      {loggedIn ? <ModeNav API={this.state.API} changeUserFunction={this.changeUser} setModeFunction={this.setMode}/>:<p></p>}
 
-      {loggedIn & myListMode ? <SelectList   listNames={this.state.listNames} changeListFunction={this.changeList} username={this.state.username}/>:<p/>}
+      {loggedIn & myListMode ? <SelectList  API={this.state.API} listNames={this.state.listNames} changeListFunction={this.changeList} username={this.state.username}/>:<p/>}
 
-      {loggedIn & myListMode ? <AddList addListFunction={this.addList}/>:<p/>}
+      {loggedIn & myListMode ? <AddList API={this.state.API} addListFunction={this.addList}/>:<p/>}
 
-      {loggedIn & myListMode ? <ListDisp showDel={true} loadListNamesFunction={this.loadListNames}  currentList={this.state.currentList }userID={this.state.userID} currentListItems={this.state.currentListItems} loadListItemsFunction={this.loadCurrentListItems} />:<p/>}
+      {loggedIn & myListMode ? <ListDisp API={this.state.API} showDel={true} loadListNamesFunction={this.loadListNames}  currentList={this.state.currentList }userID={this.state.userID} currentListItems={this.state.currentListItems} loadListItemsFunction={this.loadCurrentListItems} />:<p/>}
 
-      {loggedIn & friendMode? <FriendLists setModeFunction={this.setMode} changeUserFunction={this.changeUser} setCurrentListItemsFunction={this.setCurrentListItems} changeCurrentFriendFunction={this.changeCurrentFriend} upState={this.state} /> :<p/>}
+      {loggedIn & friendMode? <FriendLists API={this.state.API} setModeFunction={this.setMode} changeUserFunction={this.changeUser} setCurrentListItemsFunction={this.setCurrentListItems} changeCurrentFriendFunction={this.changeCurrentFriend} upState={this.state} /> :<p/>}
 
-      {loggedIn & sendRequest? <SendRequest loadSentFriendRequestsFunction={this.loadSentFriendRequests} upState={this.state}/> : <p/>}
+      {loggedIn & sendRequest? <SendRequest API={this.state.API} loadSentFriendRequestsFunction={this.loadSentFriendRequests} upState={this.state}/> : <p/>}
 
-      {loggedIn & friendRequests ?<FriendRequests loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/> :<p/>}
+      {loggedIn & friendRequests ?<FriendRequests API={this.state.API} loadMyFriendsFunction={this.loadMyFriends} loadMyFriendRequestsFunction={this.loadMyFriendRequests}upState={this.state}/> :<p/>}
 
     </div>
   );
@@ -78,6 +78,30 @@ class App extends Component{
   
   
 }
+
+// existingUser=(username)=>{
+//   let users=[];
+//   let requestURL=this.state.API+':8181/api/v1/users';
+//   let request = new XMLHttpRequest();
+//   request.open('GET', requestURL);
+//   request.responseType = 'json';
+//   request.setRequestHeader("Accept","application/json");
+//   request.onload=()=>{
+//     users=request.response;
+//     for(let user of users){
+//       if(username===users.username){
+//         console.log("trttttttttttttt");
+//         return true;
+//       }
+//     }
+//     console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+//     return false;
+//   }
+//   request.send()
+// }
+
+
+
 
 setMode=(mode)=>{
   this.setState({
@@ -104,21 +128,21 @@ test=()=>{
 }
 
 changeCurrentFriend=(friendID,friendUsername)=>{
-  console.log(friendID);
+  //console.log(friendID);
   this.setState({
     currentFriendID:friendID,
     currentFriendUsername:friendUsername
   })
-  console.log(this.state.currentFriendID);
+ //console.log(this.state.currentFriendID);
   this.loadCurrentListItemsF(friendID);
 
 }
 
 loadCurrentListItemsF=(friendID)=>{
-  //console.log('http://35.246.119.78:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
+  //console.log(this.state.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
 
   let listItems="";
-  let requestURL='http://35.246.119.78:8181/api/v1/listItems?listName='+this.state.username+'&userID='+friendID;
+  let requestURL=this.state.API+':8181/api/v1/listItems?listName='+this.state.username+'&userID='+friendID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json'
@@ -160,7 +184,7 @@ changeList=(e)=>{
 loadCurrentListItems=()=>{
 
     let listItems="";
-    let requestURL='http://35.246.119.78:8181/api/v1/listItems?listName='+this.state.currentList+'&userID='+this.state.userID;
+    let requestURL=this.state.API+':8181/api/v1/listItems?listName='+this.state.currentList+'&userID='+this.state.userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json'
@@ -176,14 +200,14 @@ loadCurrentListItems=()=>{
 loadMyFriends=()=>{
   let myFriends=[];
   let userID= this.state.userID;
-  let requestURL='http://35.246.119.78:8181/api/v1/myFriends/'+userID;
+  let requestURL=this.state.API+':8181/api/v1/myFriends/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
     request.setRequestHeader("content-Type","application/json");
     request.onload=()=>{
       myFriends=request.response
-      console.log(myFriends)
+      //console.log(myFriends)
       this.setMyFriends(myFriends);
     }
     request.send();
@@ -192,7 +216,7 @@ loadMyFriends=()=>{
 loadItems=(listName)=>{
 
   let listItems="";
-  let requestURL='http://35.246.119.78:8181/api/v1/listItems?listName='+listName+'&userID='+this.state.userID;
+  let requestURL=this.state.API+':8181/api/v1/listItems?listName='+listName+'&userID='+this.state.userID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json'
@@ -240,7 +264,7 @@ setListNames=(listNames)=>{
 loadListNames=()=>{
   //console.log("one")
   let listNames="";
-  let requestURL='http://35.246.119.78:8181/api/v1/listNames?userID='+this.state.userID;
+  let requestURL=this.state.API+':8181/api/v1/listNames?userID='+this.state.userID;
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
   request.responseType = 'json';
@@ -254,7 +278,7 @@ loadListNames=()=>{
 }
 
 hello=(name)=>{
-  console.log("hello " +name);
+  //console.log("hello " +name);
 }
 
 componentDidMount = () => {
@@ -278,14 +302,14 @@ changeUser=(userID, username) => {
 loadMyFriendRequests=()=>{
   let myFriendRequests=[];
   let userID= this.state.userID;
-  let requestURL='http://35.246.119.78:8181/api/v1/myFriendRequests/'+userID;
+  let requestURL=this.state.API+':8181/api/v1/myFriendRequests/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
     request.setRequestHeader("content-Type","application/json");
     request.onload=()=>{
       myFriendRequests=request.response
-      console.log(myFriendRequests)
+      //console.log(myFriendRequests)
       this.setMyFriendRequests(myFriendRequests);
     }
     request.send();
@@ -294,14 +318,14 @@ loadMyFriendRequests=()=>{
 loadSentFriendRequests=()=>{
   let sentFriendRequests=[];
   let userID= this.state.userID;
-  let requestURL='http://35.246.119.78:8181/api/v1/sentFriendRequests/'+userID;
+  let requestURL=this.state.API+':8181/api/v1/sentFriendRequests/'+userID;
     let request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
     request.setRequestHeader("content-Type","application/json");
     request.onload=()=>{
       sentFriendRequests=request.response
-      console.log(sentFriendRequests)
+      //console.log(sentFriendRequests)
       this.setSentFriendRequests(sentFriendRequests);
     }
     request.send();

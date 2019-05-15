@@ -38,7 +38,7 @@ class CreateUser extends Component{
             username:this.state.newUsernameText,
             password:this.state.newPasswordText
         }
-        let requestURL='http://35.246.119.78:8181/api/v1/users';
+        let requestURL=this.props.API+':8181/api/v1/users';
         let request = new XMLHttpRequest();
         request.open('POST', requestURL);
         request.responseType = 'json';
@@ -50,7 +50,8 @@ class CreateUser extends Component{
         }
         request.send(JSON.stringify(newUser));
 
-    }
+    
+}
 
     
 

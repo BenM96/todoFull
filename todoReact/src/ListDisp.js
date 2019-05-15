@@ -24,7 +24,7 @@ class ListDisp extends Component{
             <button type="button"onClick={this.addItem}>add</button>
         </form>
 
-      <ItemTable  loadListItemsFunction={this.props.loadListItemsFunction} ItemList={this.props.currentListItems} />
+      <ItemTable API={this.props.API} loadListItemsFunction={this.props.loadListItemsFunction} ItemList={this.props.currentListItems} />
 
         <br/><br/>
         {this.props.showDel?<button id="deleteCurrentList" onClick={this.deleteCurrentList}>Delete List!</button>:<p></p>}
@@ -52,7 +52,7 @@ class ListDisp extends Component{
           "desc":this.state.addItemText,
           "listName":this.props.currentList
         }
-        let requestURL='http://35.246.119.78:8181/api/v1/items';
+        let requestURL=this.props.API+':8181/api/v1/items';
         let request = new XMLHttpRequest();
         request.open('POST', requestURL);
         request.responseType = 'json';
@@ -83,7 +83,7 @@ class ListDisp extends Component{
         for (let item of items){
           let itemID= item.itemID;
           console.log(itemID);
-          let requestURL='http://35.246.119.78:8181/api/v1/item/'+itemID;
+          let requestURL=this.props.API+':8181/api/v1/item/'+itemID;
           let request = new XMLHttpRequest();
           request.open('DELETE', requestURL);
           request.responseType = 'json';

@@ -10,8 +10,8 @@ class FriendLists extends Component{
     render(){
         return(
             <div>
-                <SelectList  listNames={this.props.upState.myFriends.map(friend => friend.username)} changeListFunction={this.changeCurrentFriend} username={this.props.upState.username}/>
-                <ListDisp showDel={false} currentList={this.props.upState.username } userID={this.props.upState.currentFriendID} currentListItems={this.props.upState.currentListItems} loadListItemsFunction={this.loadListItems} />
+                <SelectList  API={this.props.API} listNames={this.props.upState.myFriends.map(friend => friend.username)} changeListFunction={this.changeCurrentFriend} username={this.props.upState.username}/>
+                <ListDisp API={this.props.API} showDel={false} currentList={this.props.upState.username } userID={this.props.upState.currentFriendID} currentListItems={this.props.upState.currentListItems} loadListItemsFunction={this.loadListItems} />
 
             </div>
         )
@@ -20,10 +20,10 @@ class FriendLists extends Component{
 
 
     loadListItems=()=>{
-        //console.log('http://35.246.119.78:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
+        //console.log(this.props.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID);
 
         let listItems="";
-        let requestURL='http://35.246.119.78:8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID;
+        let requestURL=this.props.API+':8181/api/v1/listItems?listName='+this.props.upState.username+'&userID='+this.props.upState.currentFriendID;
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json'
