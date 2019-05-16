@@ -11,13 +11,14 @@ import java.util.ArrayList;
 
 public class DataBase {
 	
-	public final String DB_URL="jdbc:mysql://localhost:3306/todo";
+	public final String DB_URL="jdbc:mysql://mysql:3306/todo";
 	public final String USER = "root";
 	public final String PASS = "pass";
 	private Connection conn= null;
 	private Statement stmt=null;
 	
 	public void build() throws SQLException {
+		DriverManager.setLoginTimeout(15);
 		conn=DriverManager.getConnection(DB_URL,USER,PASS);
 		stmt=conn.createStatement();
 		stmt.executeUpdate("CREATE database if not exists todo");

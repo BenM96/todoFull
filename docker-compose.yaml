@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  api:
+    image: benm96/api:latest
+    build: ./todoEclipse
+    depends_on:
+    - mysql
+    ports:
+    - target: 8181
+      published: 8181
+  mysql:
+    image: mysql:5.7
+    environment:
+    - MYSQL_ROOT_PASSWORD=pass
+    - MYSQL_DATABASE=todo 
+  front:
+    image: benm96/front:latest
+    build: ./todoReact/
+    depends_on:
+    - api
+    ports:
+    - target: 3000
+      published: 3000
