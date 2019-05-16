@@ -15,7 +15,7 @@ class App extends Component{
 
 
   state={
-    API:"http://localhost:80",
+    API:"",
     userID:0,
     username:"",
     currentList:"",
