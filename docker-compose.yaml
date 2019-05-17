@@ -26,6 +26,6 @@ services:
       published: 80
     volumes:
     - type: bind
-      source: nginx.conf
+      source: ./nginx.conf
       target: /ect/nginx.com
 
