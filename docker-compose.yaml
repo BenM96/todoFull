@@ -24,8 +24,11 @@ services:
     ports:
     - target: 80
       published: 80
+    depends_on:
+    - api
+    - front
     volumes:
     - type: bind
       source: ./nginx.conf
-      target: /ect/nginx.com
+      target: /etc/nginx/nginx.conf
 
